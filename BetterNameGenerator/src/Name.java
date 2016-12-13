@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 public class Name {
 
 	public Name() {
+		// test
 		JFrame f = new JFrame("Name");
 		final JPanel panel = new JPanel();
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
