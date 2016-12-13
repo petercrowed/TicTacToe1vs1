@@ -26,7 +26,7 @@ public class Name {
 
 		JButton button = new JButton();
 		button.setText("Generate Custom Name");
-		 button.setPreferredSize(new Dimension(100, 50));
+		button.setPreferredSize(new Dimension(100, 50));
 		panel.add(button);
 
 		JButton button2 = new JButton();
@@ -110,6 +110,7 @@ public class Name {
 
 	}
 
+	
 	// Generate Name
 	private static String[] Beginning = { "Kr", "Ca", "Ra", "Mrok", "Cru", "Ray", "Bre", "Zed", "Drak", "Mor", "Jag",
 			"Mer", "Jar", "Mjol", "Zork", "Mad", "Cry", "Zur", "Creo", "Azak", "Azur", "Rei", "Cro", "Mar", "Luk", "a",
@@ -208,6 +209,7 @@ public class Name {
 		name = nameBeginning + nameEnding;
 		name = name.substring(0, 1).toUpperCase() + name.substring(1);
 
+		
 		return name;
 
 	}
