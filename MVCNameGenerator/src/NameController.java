@@ -101,4 +101,19 @@ public class NameController extends NameModel{
 		return name;
 
 	}
+	
+	public static String generateNinjaName() {
+
+		String name = " ";
+		String nameBeginning = (String) ninjaName[rand.nextInt(ninjaName.length)];
+		String nameEnding = (String) ninjaName[rand.nextInt(ninjaName.length)];
+
+		name = nameBeginning + nameEnding;
+		name = name.substring(0, 1).toUpperCase() + name.substring(1);
+
+		return name;
+
+	}
+	
+	
 }
