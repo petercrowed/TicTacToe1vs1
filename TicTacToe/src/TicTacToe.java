@@ -11,7 +11,7 @@ import javax.swing.*;
 public class TicTacToe {
 
 	private JPanel panel;
-	public JButton[][] buttons;
+	public JButton[] buttons;
 	private final int SIZE = 3;
 	private GridLayout experimentLayout;
 
@@ -23,7 +23,7 @@ public class TicTacToe {
 	public static final int CROSS = 1;
 	public static final int NOUGHT = 2;
 	public static int currentPlayer;
-
+	public static boolean noDraw = false;
 	boolean[] boardState = new boolean[8];
 
 	public TicTacToe(int i) {
@@ -39,7 +39,7 @@ public class TicTacToe {
 		panel = new JPanel();
 		panel.setLayout(experimentLayout);
 
-		buttons = new JButton[SIZE][SIZE];
+		buttons = new JButton[9];
 		addButtons(panel, i);
 
 		frame.add(panel);
@@ -49,206 +49,122 @@ public class TicTacToe {
 
 	public void disableButtons() {
 		for (int k = 0; k < 3; k++) {
-			for (int j = 0; j < 3; j++) {
-				buttons[k][j].setEnabled(false);
-			}
+		
+				buttons[k].setEnabled(false);
+			
 		}
 	}
 
 	public void showWinMessageForX() {
+		noDraw  = true;
 		JOptionPane.showMessageDialog(null, " X WINS!", " " + " ", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public void showWinMessageForO() {
 		JOptionPane.showMessageDialog(null, " O WINS!", " " + " ", JOptionPane.INFORMATION_MESSAGE);
+		noDraw  = true;
 	}
 	
 	public void showDrawMessage() {
 		JOptionPane.showMessageDialog(null, "Draw!", " " + " ", JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	public void checkForWinX() {
 
-	public void checkForWin() {
-		if (buttons[0][0].getText() == "X" && buttons[1][0].getText() == "X" && buttons[2][0].getText() == "X") {
+		for (int k = 0; k < 3; k++) {
 
-			buttons[0][0].setBackground(Color.CYAN);
-			buttons[1][0].setBackground(Color.CYAN);
-			buttons[2][0].setBackground(Color.CYAN);
+			if (buttons[k].getText() == "X" && buttons[k + 3].getText() == "X" && buttons[k + 6].getText() == "X") {
+
+				buttons[k].setBackground(Color.CYAN);
+				buttons[k + 3].setBackground(Color.CYAN);
+				buttons[k + 6].setBackground(Color.CYAN);
+				disableButtons();
+				showWinMessageForX();
+
+			}
+
+		}
+
+		for (int i = 0; i < 3; i++) {
+			System.out.println(i);
+			if (buttons[3 * i].getText() == "X" && buttons[3 * i + 1].getText() == "X"
+					&& buttons[3 * i + 2].getText() == "X") {
+
+				buttons[3 * i].setBackground(Color.CYAN);
+				buttons[3 * i + 1].setBackground(Color.CYAN);
+				buttons[3 * i + 2].setBackground(Color.CYAN);
+				disableButtons();
+				showWinMessageForX();
+
+			}
+
+		}
+		if (buttons[0].getText() == "X" && buttons[4].getText() == "X" && buttons[8].getText() == "X") {
+			buttons[0].setBackground(Color.CYAN);
+			buttons[4].setBackground(Color.CYAN);
+			buttons[8].setBackground(Color.CYAN);
 			disableButtons();
 			showWinMessageForX();
-
 		}
 
-		if (buttons[0][1].getText() == "X" && buttons[1][1].getText() == "X" && buttons[2][1].getText() == "X") {
-
-			buttons[0][1].setBackground(Color.CYAN);
-			buttons[1][1].setBackground(Color.CYAN);
-			buttons[2][1].setBackground(Color.CYAN);
+		if (buttons[2].getText() == "X" && buttons[4].getText() == "X" && buttons[6].getText() == "X") {
+			buttons[2].setBackground(Color.CYAN);
+			buttons[4].setBackground(Color.CYAN);
+			buttons[6].setBackground(Color.CYAN);
 			disableButtons();
-			System.out.println("X Win");
 			showWinMessageForX();
-
-		}
-		if (buttons[0][2].getText() == "X" && buttons[1][2].getText() == "X" && buttons[2][2].getText() == "X") {
-
-			buttons[0][2].setBackground(Color.CYAN);
-			buttons[1][2].setBackground(Color.CYAN);
-			buttons[2][2].setBackground(Color.CYAN);
-			disableButtons();
-			System.out.println("X Win");
-			showWinMessageForX();
-
-		}
-		// HORIZONTAL
-
-		if (buttons[0][0].getText() == "X" && buttons[0][1].getText() == "X" && buttons[0][2].getText() == "X") {
-
-			buttons[0][0].setBackground(Color.CYAN);
-			buttons[0][1].setBackground(Color.CYAN);
-			buttons[0][2].setBackground(Color.CYAN);
-			disableButtons();
-			System.out.println("X Win");
-			showWinMessageForX();
-
 		}
 
-		if (buttons[1][0].getText() == "X" && buttons[1][1].getText() == "X" && buttons[1][2].getText() == "X") {
-
-			buttons[1][0].setBackground(Color.CYAN);
-			buttons[1][1].setBackground(Color.CYAN);
-			buttons[1][2].setBackground(Color.CYAN);
-			disableButtons();
-			System.out.println("X Win");
-			showWinMessageForX();
-
-		}
-		if (buttons[2][0].getText() == "X" && buttons[2][1].getText() == "X" && buttons[2][2].getText() == "X") {
-
-			buttons[2][0].setBackground(Color.CYAN);
-			buttons[2][1].setBackground(Color.CYAN);
-			buttons[2][2].setBackground(Color.CYAN);
-			disableButtons();
-			System.out.println("X Win");
-			showWinMessageForX();
-
-		}
-
-		// CROSSED
-
-		if (buttons[0][0].getText() == "X" && buttons[1][1].getText() == "X" && buttons[2][2].getText() == "X") {
-
-			buttons[0][0].setBackground(Color.CYAN);
-			buttons[1][1].setBackground(Color.CYAN);
-			buttons[2][2].setBackground(Color.CYAN);
-			disableButtons();
-			System.out.println("X Win");
-			showWinMessageForX();
-
-		}
-
-		if (buttons[2][0].getText() == "X" && buttons[1][1].getText() == "X" && buttons[0][2].getText() == "X") {
-
-			buttons[2][0].setBackground(Color.CYAN);
-			buttons[1][1].setBackground(Color.CYAN);
-			buttons[0][2].setBackground(Color.CYAN);
-			disableButtons();
-			System.out.println("X Win");
-			showWinMessageForX();
-
-		}
-
-		// For O
-
-		if (buttons[0][0].getText() == "O" && buttons[1][0].getText() == "O" && buttons[2][0].getText() == "O") {
-
-			buttons[0][0].setBackground(Color.CYAN);
-			buttons[1][0].setBackground(Color.CYAN);
-			buttons[2][0].setBackground(Color.CYAN);
-			disableButtons();
-			System.out.println("X Win");
-			showWinMessageForO();
-
-		}
-
-		if (buttons[0][1].getText() == "O" && buttons[1][1].getText() == "O" && buttons[2][1].getText() == "O") {
-
-			buttons[0][1].setBackground(Color.CYAN);
-			buttons[1][1].setBackground(Color.CYAN);
-			buttons[2][1].setBackground(Color.CYAN);
-			disableButtons();
-			System.out.println("X Win");
-			showWinMessageForO();
-
-		}
-		if (buttons[0][2].getText() == "O" && buttons[1][2].getText() == "O" && buttons[2][2].getText() == "O") {
-
-			buttons[0][2].setBackground(Color.CYAN);
-			buttons[1][2].setBackground(Color.CYAN);
-			buttons[2][2].setBackground(Color.CYAN);
-			disableButtons();
-			System.out.println("X Win");
-			showWinMessageForO();
-
-		}
-		// HORIZONTAL
-
-		if (buttons[0][0].getText() == "O" && buttons[0][1].getText() == "O" && buttons[0][2].getText() == "O") {
-
-			buttons[0][0].setBackground(Color.CYAN);
-			buttons[0][1].setBackground(Color.CYAN);
-			buttons[0][2].setBackground(Color.CYAN);
-			disableButtons();
-			System.out.println("X Win");
-			showWinMessageForO();
-
-		}
-
-		if (buttons[1][0].getText() == "O" && buttons[1][1].getText() == "O" && buttons[1][2].getText() == "O") {
-
-			buttons[1][0].setBackground(Color.CYAN);
-			buttons[1][1].setBackground(Color.CYAN);
-			buttons[1][2].setBackground(Color.CYAN);
-			disableButtons();
-			System.out.println("X Win");
-			showWinMessageForO();
-
-		}
-		if (buttons[2][0].getText() == "O" && buttons[2][1].getText() == "O" && buttons[2][2].getText() == "O") {
-
-			buttons[2][0].setBackground(Color.CYAN);
-			buttons[2][1].setBackground(Color.CYAN);
-			buttons[2][2].setBackground(Color.CYAN);
-			disableButtons();
-			System.out.println("X Win");
-			showWinMessageForO();
-
-		}
-
-		// CROSSED
-
-		if (buttons[0][0].getText() == "O" && buttons[1][1].getText() == "O" && buttons[2][2].getText() == "O") {
-
-			buttons[0][0].setBackground(Color.CYAN);
-			buttons[1][1].setBackground(Color.CYAN);
-			buttons[2][2].setBackground(Color.CYAN);
-			disableButtons();
-			System.out.println("X Win");
-			showWinMessageForO();
-
-		}
-
-		if (buttons[2][0].getText() == "O" && buttons[1][1].getText() == "O" && buttons[0][2].getText() == "O") {
-
-			buttons[2][0].setBackground(Color.CYAN);
-			buttons[1][1].setBackground(Color.CYAN);
-			buttons[0][2].setBackground(Color.CYAN);
-			disableButtons();
-			System.out.println("X Win");
-			showWinMessageForO();
-
-		}
 	}
 
+	public void checkForWinO() {
+
+		for (int k = 0; k < 3; k++) {
+
+			if (buttons[k].getText() == "O" && buttons[k + 3].getText() == "O" && buttons[k + 6].getText() == "O") {
+
+				buttons[k].setBackground(Color.CYAN);
+				buttons[k + 3].setBackground(Color.CYAN);
+				buttons[k + 6].setBackground(Color.CYAN);
+				disableButtons();
+				showWinMessageForO();
+
+			}
+
+		}
+
+		for (int i = 0; i < 3; i++) {
+			System.out.println(i);
+			if (buttons[3 * i].getText() == "O" && buttons[3 * i + 1].getText() == "O"
+					&& buttons[3 * i + 2].getText() == "O") {
+
+				buttons[3 * i].setBackground(Color.CYAN);
+				buttons[3 * i + 1].setBackground(Color.CYAN);
+				buttons[3 * i + 2].setBackground(Color.CYAN);
+				disableButtons();
+				showWinMessageForO();
+
+			}
+
+		}
+		if (buttons[0].getText() == "O" && buttons[4].getText() == "O" && buttons[8].getText() == "O") {
+			buttons[0].setBackground(Color.CYAN);
+			buttons[4].setBackground(Color.CYAN);
+			buttons[8].setBackground(Color.CYAN);
+			disableButtons();
+			showWinMessageForO();
+		}
+
+		if (buttons[2].getText() == "O" && buttons[4].getText() == "O" && buttons[6].getText() == "O") {
+			buttons[2].setBackground(Color.CYAN);
+			buttons[4].setBackground(Color.CYAN);
+			buttons[6].setBackground(Color.CYAN);
+			disableButtons();
+			showWinMessageForO();
+		}
+
+	}
+	
 	public int playerTurn(int i) {
 		if (i == 1) {
 			currentPlayer = (currentPlayer == CROSS) ? NOUGHT : CROSS;
@@ -261,58 +177,35 @@ public class TicTacToe {
 		return currentPlayer;
 	}
 
-	public void changeButtonsColorAndCheckForWin(ActionEvent e) {
-
-		// TESTING. Maybe in The future to make the code simpler
-		// System.out.println(((AbstractButton) e.getSource()).getName());
-		// String a = (String) ((Component) e.getSource()).getName();
-		// String b = (String) ((AbstractButton) e.getSource()).getText();
-		//
-		// number = Integer.parseInt(a);
-		//
-		// // HORIZONTAL
-		//
-		// String ab = a + b;
-		// fieldAndSymbol.add(ab);
-		//
-		// if ( fieldAndSymbol.contains("4X") && fieldAndSymbol.contains("3X")
-		// && fieldAndSymbol.contains("8X")) {
-		//
-		// disableButtons();
-		// showWinMessageForX();
-		// }
-		//
-		//
-
-		// For X
-		// VERTICAL
-
-	}
-
 
 	public void addButtons(JPanel panel, int i) {
 
 		// MagicNumbers();
 
-		for (int k = 0; k < SIZE; k++) {
-			for (int j = 0; j < SIZE; j++) {
-
+		for (int k = 0; k < 9; k++) {
+			 {
+				for(int l = 0;  l < 8; l++)
 				{
-					buttons[k][j] = new JButton(" ");
-					buttons[k][j].setName(" ");
+					{
+						String valueFromInt = Integer.toString(l);
+						buttons[k] = new JButton(" ");
+						buttons[k].setName(valueFromInt);
+
+					}
 
 				}
-
-				buttons[k][j].addActionListener(new ActionListener() {
+				
+				buttons[k].addActionListener(new ActionListener() {
 
 					public void actionPerformed(ActionEvent e) {
 						// this makes sure the button you are pressing is the
 						// button variable
-						if (e.getSource() == buttons[0][0] || e.getSource() == buttons[0][1]
-								|| e.getSource() == buttons[0][2] || e.getSource() == buttons[1][0]
-								|| e.getSource() == buttons[1][1] || e.getSource() == buttons[1][2]
-								|| e.getSource() == buttons[2][0] || e.getSource() == buttons[2][1]
-								|| e.getSource() == buttons[2][2]) {
+						if (e.getSource() == buttons[0] || e.getSource() == buttons[1]
+								|| e.getSource() == buttons[2] || e.getSource() == buttons[3]
+								|| e.getSource() == buttons[4]|| e.getSource() == buttons[5]
+								|| e.getSource() == buttons[6] || e.getSource() == buttons[7]
+								|| e.getSource() == buttons[8]) 
+						{
 
 							if (playerTurn(i) == 1) {
 								((AbstractButton) e.getSource()).setText("X");
@@ -330,17 +223,19 @@ public class TicTacToe {
 								round++;
 							}
 							System.out.println("Round :" + round);
-							if(round == 9)
+							
+							checkForWinX();
+							checkForWinO();
+													
+							if(round == 9 && noDraw  == false)
 							{
 								showDrawMessage();
 							}
-							checkForWin();
-
 						}
 					}
 				});
 
-				panel.add(buttons[k][j]);
+				panel.add(buttons[k]);
 
 			}
 		}
